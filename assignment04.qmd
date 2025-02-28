@@ -16,6 +16,8 @@ library(ggplot2)
 # we found the package called wbstats~~~~~ need to put explains
 library(wbstats)
 japanbirthrate <- wb_data(country = "Japan", indicator = c("SP.DYN.CBRT.IN"))
+japanwolaborforce <- wb_data(country = "Japan", indicator = c("SL.TLF.TOTL.FE.ZS"))
+japandataset <- full_join(japanbirthrate, japanwolaborforce)
 ```
 
 # wbstats meaning
