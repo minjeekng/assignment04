@@ -12,22 +12,51 @@ format:
 ```{r}
 # if the program hasn't downloaded the "wbstats" package, run "install.packages("wbstats")".
 library(tidyverse)
+library(ggplot2)
+# we found the package called wbstats~~~~~ need to put explains
 library(wbstats)
 japanbirthrate <- wb_data(country = "Japan", indicator = c("SP.DYN.CBRT.IN"))
 ```
 
+# wbstats meaning
+https://cran.r-project.org/web/packages/wbstats/wbstats.pdf
 
-# Exercise 01
+# First ggplot2 Graph (Bar Chart)
+
+```{r}
+
+ggplot(japanbirthrate, mapping = aes(x = date, y = SP.DYN.CBRT.IN, fill = date)) +
+  geom_col() +
+  labs(title = "Birth Rate in Japan by Year (1960 - 2022)",
+       subtitle = ".",
+       x = "Year",
+       y = "Birth Rate",
+       caption = "Data Source: World Bank Group")
+
+```
+
+# Second ggplot2 Graph
+
+```{r}
+
+
+
+```
+
+# We got our dataset from World Bank
+1) Source of the data:
+https://data.worldbank.org/indicator/SP.DYN.TFRT.IN?locations=JP
+
+# Third ggplot2 Graph
 
 ```{r}
 
 
 ```
 
-# Exercise 02
+# Fourth ggplot2 Graph
 
 ```{r}
 
 
 ```
-
