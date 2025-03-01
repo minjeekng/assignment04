@@ -1,7 +1,7 @@
 ---
 title: "Data Science for Public Policy"
 subtitle: "Assignment 04"
-author: "Minji Kang - mk2322, Ziqiao Shan - zs352"
+author: "Minji Kang - mk2322 and Ziqiao Shan - zs352"
 execute:
   warning: false
 format:
@@ -10,69 +10,78 @@ format:
 ---
 
 ```{r}
-# if the program hasn't downloaded the "wbstats" package, run "install.packages("wbstats")".
+# install readxl package to read excel file, if needed
+# install.packages("readxl")
+
+library(readxl)
+
 library(tidyverse)
+
 library(ggplot2)
-# we found the package called wbstats~~~~~ need to put explains
-library(wbstats)
-japanbirthrate <- wb_data(country = "Japan", indicator = c("SP.DYN.CBRT.IN"))
-japanwolaborforce <- wb_data(country = "Japan", indicator = c("SL.TLF.TOTL.FE.ZS"))
-japandataset <- full_join(japanbirthrate, japanwolaborforce)
-newdata <- japandataset |>
-  filter(date >= 1990, date <= 2022)
+
+# Korea Birth Rate (By Province)
+
+birthrate <-
+  read_xlsx("data/birthrate.xlsx") 
+
+birthrate <- birthrate |>
+  pivot_longer(
+    cols = starts_with("20"),
+    names_to = "year",
+    values_to = "birthrate"
+  )
+
+# Korea Single Household Dataset (By Administrative Region)
+
 ```
 
-1) wbstats meaning (need to revise it later)
-https://cran.r-project.org/web/packages/wbstats/wbstats.pdf
+# First ggplot2 Graph (Bar Chart)
 
-2) We got our dataset from World Bank
-Source of the data:
-https://data.worldbank.org/indicator/SP.DYN.TFRT.IN?locations=JP
+## Breif Explanation:
 
-# 1st ggplot2 Graph (Bar Chart)
+We used a South Korea's birthrate by region to compare 
 
 ```{r}
 # First ggplot2 Graph (Bar Chart)
 # **Need to add a proper subtitle
 # **Need to design it later (font size color etc)
 
-# try 1 (got a warning sign)
-ggplot(newdata, mapping = aes(x = SL.TLF.TOTL.FE.ZS, y = SP.DYN.CBRT.IN, fill = date)) +
-  geom_col(width = 0.03) +
-  labs(title = "Annual Changes in Birth Rate and Female Labor Force by 1990-2022",
-       subtitle = ".",
-       x = "Female Labor Force",
-       y = "Birth Rate",
-       caption = "Data Source: World Bank Group")
+# We used abbreviation of provinces' names, instead of full name. The reason is that the province's names are long.
 
-# new version
-ggplot(newdata, mapping = aes(x = SP.DYN.CBRT.IN, y = SL.TLF.TOTL.FE.ZS, fill = date)) +
-  geom_col(width = 0.03) +
-  labs(title = "Annual Changes in Birth Rate and Female Labor Force by 1990-2022",
-       subtitle = ".",
-       x = "Birth Rate",
-       y = "Female Labor Force",
-       caption = "Data Source: World Bank Group")
+ggplot(birthrate, mapping = aes(x = Province, y = birthrate, fill = year, color = )) +
+  geom_col(width = 0.5) +
+  labs(title = "Employment Rate by Age Specification",
+       subtitle = "Age 16 and Older + & EMPSTAT as Employed",
+       x = "Age Specification",
+       y = "Employment Rate",
+       caption = "Data Source: National Bureau of Economic Research (NBER)") +
+  theme(axis.text.x = element_text(size = 5))
+
 ```
+## Abbreviations for Each Provinces:
+1. Whole country → (Total) Tot.
+2. Seoul →	SEO
+3. Busan →	BUS
+4. Daegu →	DAE
+5. Incheon →	INC
+6. Gwangju →	GWJ
+7. Daejeon →	DJN
+8. Ulsan →	ULS
+9. Sejong-si →	SJG
+10. Gyeonggi-do →	GGD
+11. Gangwon-do →	GWD
+12. Chungcheongbuk-do →	CCB
+13. Chungcheongnam-do →	CCN
+14. Jeollabuk-do →	JLB
+15. Jeollanam-do →	JLN
+16. Gyeongsangbuk-do →	GSB
+17. Gyeongsangnam-do →	GSN
+18. Jeju →	JEJ
 
 # 2nd ggplot2 Graph (Scatterplot)
 
 ```{r}
-# Second ggplot2 Graph (Scatterplot)
-# **Need to add a proper subtitle
-# **Need to design it later (font size color etc)
-# **Need to add more aes in aes
 
-# try 1
-ggplot(newdata, mapping = aes(x = SP.DYN.CBRT.IN, y = SL.TLF.TOTL.FE.ZS)) +
-  geom_point(alpha = 0.3, color = "green") +
-  geom_smooth(method = "lm", color = "pink") +
-  labs(title = "Annual Changes in Birth Rate and Female Labor Force by 1990-2022",
-       subtitle = ".",
-       x = "Birth Rate",
-       y = "Female Labor Force",
-       caption = "Data Source: World Bank Group") +
-  theme_minimal()
 ```
 
 # 3rd ggplot2 Graph (Histogram)
