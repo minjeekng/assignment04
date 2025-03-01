@@ -31,33 +31,58 @@ birthrate <- birthrate |>
     values_to = "birthrate"
   )
 
+# Korea Housing Price (By Province)
+
+housingprice <-
+  read_xlsx("data/housingprice.xlsx") 
+
+housingprice <- housingprice |>
+  pivot_longer(
+    cols = starts_with("20"),
+    names_to = "year",
+    values_to = "housingprice"
+  )
+
+housingprice <- housingprice |>
+  mutate(housingprice = as.numeric(housingprice))
+
 # Korea Single Household Dataset (By Administrative Region)
 
 ```
 
 # First ggplot2 Graph (Bar Chart)
 
-## Breif Explanation:
+## Breif Dataset Explanation:
 
-We used a South Korea's birthrate by region to compare 
+The data used in Graph 1 is a 2015 - 2023 dataset that reflects fertility rates for provinces on a website run by South Korean government called the Korean Statistical Information Service (KOSIS).
 
 ```{r}
 # First ggplot2 Graph (Bar Chart)
 # **Need to add a proper subtitle
 # **Need to design it later (font size color etc)
 
-# We used abbreviation of provinces' names, instead of full name. The reason is that the province's names are long.
+# We used abbreviation of provinces' names, instead of full name. The reason is 
+#that the province's names are long.
 
 ggplot(birthrate, mapping = aes(x = Province, y = birthrate, fill = year, color = )) +
   geom_col(width = 0.5) +
-  labs(title = "Employment Rate by Age Specification",
-       subtitle = "Age 16 and Older + & EMPSTAT as Employed",
-       x = "Age Specification",
-       y = "Employment Rate",
-       caption = "Data Source: National Bureau of Economic Research (NBER)") +
-  theme(axis.text.x = element_text(size = 5))
+  labs(title = "Annual Birth Rate by Province in South Kore (2015 - 2023)",
+       subtitle = "Urbanized areas show lower fertility rates, but exceptionally,
+Sejong(SJG) is a new city but has a high fertility rate.",
+       x = "Province",
+       y = "Birthrate (%)",
+       caption = "Data Source: Korean Statistical Information Service (KOSIS)") +
+  theme(
+    plot.title = element_text(size = 20),
+    plot.subtitle = element_text(size = 8, color = "Dark Blue"),
+    legend.title = element_text(size = 13),
+    axis.text.x = element_text(size = 5))
 
 ```
+## Dataset Graph Output Explanation:
+
+Even in South Korean society, where the low birth rate is severe, the gap in fertility rates between regions is widening and the reason for this gap is mainly due to the infrastructure gap. Sejong, the highest birth region found in the graph, was constructed in 2012 when the central government of Korea moved here. This city may have the highest birth rate because of its infrastructure and gathering of people with stable employment. The birth rate is affected by various factors, such as jobs, housing, and education, and it is in Sejong that the three major factors work well. However, although the capital city of Seoul has many jobs, it actually has the highest housing prices, so the low birth rate exists.
+
 ## Abbreviations for Each Provinces:
 1. Whole country → (Total) Tot.
 2. Seoul →	SEO
@@ -80,7 +105,35 @@ ggplot(birthrate, mapping = aes(x = Province, y = birthrate, fill = year, color 
 
 # 2nd ggplot2 Graph (Scatterplot)
 
+## Breif Dataset Explanation:
+
+The data used in Graph 2 are 2015 - 2023 datasets that reflects fertility rates and housing prices for provinces on a website run by South Korean government called the Korean Statistical Information Service (KOSIS).
+
 ```{r}
+# Second ggplot2 Graph (Scatterplot)
+
+scatterplotdata <- full_join(birthrate, housingprice)
+
+scatterplotdata <- scatterplotdata |>
+  filter(Province %in% c("SEO"))
+
+ggplot(scatterplotdata, aes(x = housingprice, y = birthrate)) +
+  geom_point(alpha = 0.5, color = "red") +
+  geom_smooth(method = "lm", color = "orange") +
+  labs(
+    title = "Annual Housing Price 
+and Birth Rate Relationship 
+in Seoul (2015 - 2023)", 
+    subtitle = "When looking closely at Seoul,
+which had the lowest fertility rate,
+it is shown that the higher the house price, the lower the fertility rate.", 
+    x = "Housing Price", 
+    y = "Birthrate (%)", 
+    caption = "Data Source: Korean Statistical Information Service (KOSIS)") + 
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 20),
+    plot.subtitle = element_text(size = 8, color = "Dark Blue"))
 
 ```
 
