@@ -1,6 +1,6 @@
 ---
 title: "Data Science for Public Policy"
-subtitle: "Assignment XX"
+subtitle: "Assignment 04"
 author: "Minji Kang - mk2322, Ziqiao Shan - zs352"
 execute:
   warning: false
@@ -18,47 +18,71 @@ library(wbstats)
 japanbirthrate <- wb_data(country = "Japan", indicator = c("SP.DYN.CBRT.IN"))
 japanwolaborforce <- wb_data(country = "Japan", indicator = c("SL.TLF.TOTL.FE.ZS"))
 japandataset <- full_join(japanbirthrate, japanwolaborforce)
+newdata <- japandataset |>
+  filter(date >= 1990, date <= 2022)
 ```
 
-# wbstats meaning
+1) wbstats meaning (need to revise it later)
 https://cran.r-project.org/web/packages/wbstats/wbstats.pdf
 
-# First ggplot2 Graph (Bar Chart)
+2) We got our dataset from World Bank
+Source of the data:
+https://data.worldbank.org/indicator/SP.DYN.TFRT.IN?locations=JP
+
+# 1st ggplot2 Graph (Bar Chart)
 
 ```{r}
+# First ggplot2 Graph (Bar Chart)
+# **Need to add a proper subtitle
+# **Need to design it later (font size color etc)
 
-ggplot(japanbirthrate, mapping = aes(x = date, y = SP.DYN.CBRT.IN, fill = date)) +
-  geom_col() +
-  labs(title = "Birth Rate in Japan by Year (1960 - 2022)",
+# try 1 (got a warning sign)
+ggplot(newdata, mapping = aes(x = SL.TLF.TOTL.FE.ZS, y = SP.DYN.CBRT.IN, fill = date)) +
+  geom_col(width = 0.03) +
+  labs(title = "Annual Changes in Birth Rate and Female Labor Force by 1990-2022",
        subtitle = ".",
-       x = "Year",
+       x = "Female Labor Force",
        y = "Birth Rate",
        caption = "Data Source: World Bank Group")
 
+# new version
+ggplot(newdata, mapping = aes(x = SP.DYN.CBRT.IN, y = SL.TLF.TOTL.FE.ZS, fill = date)) +
+  geom_col(width = 0.03) +
+  labs(title = "Annual Changes in Birth Rate and Female Labor Force by 1990-2022",
+       subtitle = ".",
+       x = "Birth Rate",
+       y = "Female Labor Force",
+       caption = "Data Source: World Bank Group")
 ```
 
-# Second ggplot2 Graph
+# 2nd ggplot2 Graph (Scatterplot)
+
+```{r}
+# Second ggplot2 Graph (Scatterplot)
+# **Need to add a proper subtitle
+# **Need to design it later (font size color etc)
+# **Need to add more aes in aes
+
+# try 1
+ggplot(newdata, mapping = aes(x = SP.DYN.CBRT.IN, y = SL.TLF.TOTL.FE.ZS)) +
+  geom_point(alpha = 0.3, color = "green") +
+  geom_smooth(method = "lm", color = "pink") +
+  labs(title = "Annual Changes in Birth Rate and Female Labor Force by 1990-2022",
+       subtitle = ".",
+       x = "Birth Rate",
+       y = "Female Labor Force",
+       caption = "Data Source: World Bank Group") +
+  theme_minimal()
+```
+
+# 3rd ggplot2 Graph (Histogram)
 
 ```{r}
 
-
-
 ```
 
-# We got our dataset from World Bank
-1) Source of the data:
-https://data.worldbank.org/indicator/SP.DYN.TFRT.IN?locations=JP
-
-# Third ggplot2 Graph
+# 4th ggplot2 Graph (Line Plot)
 
 ```{r}
-
-
-```
-
-# Fourth ggplot2 Graph
-
-```{r}
-
 
 ```
