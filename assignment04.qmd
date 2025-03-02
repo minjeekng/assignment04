@@ -1,6 +1,6 @@
 ---
 title: "Data Science for Public Policy"
-subtitle: "Assignment 04"
+subtitle: "Assignment04"
 author: "Minji Kang - mk2322 and Ziqiao Shan - zs352"
 execute:
   warning: false
