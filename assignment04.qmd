@@ -1,6 +1,6 @@
 ---
 title: "Data Science for Public Policy"
-subtitle: "Assignment04"
+subtitle: "Assignment 04"
 author: "Minji Kang - mk2322 and Ziqiao Shan - zs352"
 execute:
   warning: false
@@ -147,6 +147,7 @@ it is shown that the higher the house price, the lower the fertility rate.",
 
 # 3rd ggplot2 Graph (Histogram)
 
+## Breif Dataset Explanation:
 ```{r}
 # Third ggplot2 Graph (Histogram)
 
@@ -170,6 +171,29 @@ ggplot(workhour, mapping = aes(x = workhour, fill = Agegroup)) +
 
 # 4th ggplot2 Graph (Line Plot)
 
+## Breif Dataset Explanation:
+The data used in Graph 4 is 2016 - 2023 dataset that reflects Seoul's Annual household Expenditures on Private Education according to KOSIS official website.
 ```{r}
+#Due to missing data in year 2025, we use data from 2016 to 2023 in this part
+#The line pot reflects the private education expenditures in Seoul from 2016 to 2023
+#Seoul's Education Expenditures
+seoul_edu <- 
+  read_excel("data/seoul_edu.xlsx")
 
+ggplot(seoul_edu, aes(x = Year, y = Expenditures)) +
+  geom_line(color = "red", size = 1) +
+  geom_point(color = "orange", size = 2) +
+  scale_x_continuous(breaks = 2016:2023) +
+  labs(
+    title = "Private Education Expenditures in Seoul (2016-2023)",
+    subtitle = "Annual household expenditures on private education",
+    x = "Year",
+    y = "Expenditure (billion Won)",
+    caption = "Source: Korea Statistical Information Service"
+  ) +
+  theme_minimal()
 ```
+# 
+
+## Dataset Graph Output Explanation:
+The chart shows a generally upward trend in private education expenditures in Seoul from 2016 to 2023. Despite some fluctuations in year 2020 which may be influenced by the outbreak of COVID-19, the overall increase suggests growing demand or greater investment in private education over this period. By 2023, expenditures are noticeably higher than in 2016, indicating that private education remains a significant and possibly expanding sector. However, additional context—such as population changes, policy shifts, or economic factors—would be needed to fully explain the observed trend.
