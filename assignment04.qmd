@@ -46,8 +46,16 @@ housingprice <- housingprice |>
 housingprice <- housingprice |>
   mutate(housingprice = as.numeric(housingprice))
 
-# Korea Single Household Dataset (By Administrative Region)
+# Korea Working Hours Dataset (By Age Group)
 
+workhour <- read_xlsx("data/workhour.xlsx")
+
+workhour <- workhour |>
+  pivot_longer(
+    cols = starts_with("20"),
+    names_to = "year",
+    values_to = "workhour"
+  )
 ```
 
 # First ggplot2 Graph (Bar Chart)
@@ -140,6 +148,23 @@ it is shown that the higher the house price, the lower the fertility rate.",
 # 3rd ggplot2 Graph (Histogram)
 
 ```{r}
+# Third ggplot2 Graph (Histogram)
+
+# **Need to add a proper subtitle
+# **Need to design it later (font size color etc)
+
+ggplot(workhour, mapping = aes(x = workhour, fill = Agegroup)) +
+  geom_histogram(binwidth = 0.5) +
+  labs(title = "Monthly Working Hours by Age Groups (2015 - 2023)",
+       subtitle = "....******need to revise it",
+       x = "Work Hours",
+       y = "Frequency",
+       caption = "Data Source: Korean Statistical Information Service (KOSIS)") +
+  theme(
+    plot.title = element_text(size = 20),
+    plot.subtitle = element_text(size = 8, color = "Dark Blue"),
+    legend.title = element_text(size = 13),
+    axis.text.x = element_text(size = 5))
 
 ```
 
