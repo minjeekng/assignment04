@@ -60,9 +60,9 @@ workhour <- workhour |>
 
 # First ggplot2 Graph (Bar Chart)
 
-## Breif Dataset Explanation:
+## Brief Dataset Explanation:
 
-The data used in Graph 1 is a 2015 - 2023 dataset that reflects fertility rates for provinces on a website run by South Korean government called the Korean Statistical Information Service (KOSIS).
+Graph 1 uses data from a 2015-2023 dataset provided by the Korean Statistical Information Service (KOSIS), a government-run website that reports fertility rates for each province.
 
 ```{r}
 # First ggplot2 Graph (Bar Chart)
@@ -74,9 +74,8 @@ The data used in Graph 1 is a 2015 - 2023 dataset that reflects fertility rates 
 
 ggplot(birthrate, mapping = aes(x = Province, y = birthrate, fill = year, color = )) +
   geom_col(width = 0.5) +
-  labs(title = "Annual Birth Rate by Province in South Kore (2015 - 2023)",
-       subtitle = "Urbanized areas show lower fertility rates, but exceptionally,
-Sejong(SJG) is a new city but has a high fertility rate.",
+  labs(title = "Annual Birth Rate by Province in South Korea (2015 - 2023)",
+       subtitle = "Urbanized areas show lower fertility rates;however, Sejong (SJG),a newly established city, exhibits an exceptionally high rate.",
        x = "Province",
        y = "Birthrate (%)",
        caption = "Data Source: Korean Statistical Information Service (KOSIS)") +
@@ -89,7 +88,8 @@ Sejong(SJG) is a new city but has a high fertility rate.",
 ```
 ## Dataset Graph Output Explanation:
 
-Even in South Korean society, where the low birth rate is severe, the gap in fertility rates between regions is widening and the reason for this gap is mainly due to the infrastructure gap. Sejong, the highest birth region found in the graph, was constructed in 2012 when the central government of Korea moved here. This city may have the highest birth rate because of its infrastructure and gathering of people with stable employment. The birth rate is affected by various factors, such as jobs, housing, and education, and it is in Sejong that the three major factors work well. However, although the capital city of Seoul has many jobs, it actually has the highest housing prices, so the low birth rate exists.
+Even in South Korea, where low birth rates are a serious concern, regional disparities in fertility rates are widening, primarily due to differences in infrastructure. Sejong—the region with the highest birth rate in our graph—was established in 2012 when the central government relocated there. The city's advanced infrastructure and concentration of residents with stable employment may be key factors driving its high birth rate. While birth rates are influenced by a variety of factors such as jobs, housing, and education, Sejong seems to effectively integrate all three. In contrast, although Seoul offers abundant employment opportunities, its exorbitant housing prices contribute to its lower birth rate.
+
 
 ## Abbreviations for Each Provinces:
 1. Whole country → (Total) Tot.
@@ -113,9 +113,10 @@ Even in South Korean society, where the low birth rate is severe, the gap in fer
 
 # 2nd ggplot2 Graph (Scatterplot)
 
-## Breif Dataset Explanation:
+## Brief Dataset Explanation:
 
-The data used in Graph 2 are 2015 - 2023 datasets that reflects fertility rates and housing prices for provinces on a website run by South Korean government called the Korean Statistical Information Service (KOSIS).
+The data used in Graph 2 come from datasets spanning 2015 to 2023 that reflect provincial fertility rates and housing prices, sourced from KOSIS.
+
 
 ```{r}
 # Second ggplot2 Graph (Scatterplot)
@@ -132,9 +133,7 @@ ggplot(scatterplotdata, aes(x = housingprice, y = birthrate)) +
     title = "Annual Housing Price 
 and Birth Rate Relationship 
 in Seoul (2015 - 2023)", 
-    subtitle = "When looking closely at Seoul,
-which had the lowest fertility rate,
-it is shown that the higher the house price, the lower the fertility rate.", 
+    subtitle = "A closer look at Seoul—despite having the lowest fertility rate—reveals that higher housing prices correspond with lower birth rates.", 
     x = "Housing Price", 
     y = "Birthrate (%)", 
     caption = "Data Source: Korean Statistical Information Service (KOSIS)") + 
@@ -147,7 +146,10 @@ it is shown that the higher the house price, the lower the fertility rate.",
 
 # 3rd ggplot2 Graph (Histogram)
 
-## Breif Dataset Explanation:
+## Brief Dataset Explanation:
+
+The data used in Graph 3 come from datasets spanning 2015 to 2023 that capture monthly working hours across various age groups, sourced from KOSIS
+
 ```{r}
 # Third ggplot2 Graph (Histogram)
 
@@ -157,8 +159,8 @@ it is shown that the higher the house price, the lower the fertility rate.",
 ggplot(workhour, mapping = aes(x = workhour, fill = Agegroup)) +
   geom_histogram(binwidth = 0.5) +
   labs(title = "Monthly Working Hours by Age Groups (2015 - 2023)",
-       subtitle = "....******need to revise it",
-       x = "Work Hours",
+       subtitle = "An analysis of monthly working hours by age groups from 2015 to 2023 reveals distinct trends in work patterns, highlighting evolving labor demands and generational differences.",  #subtitle needs to be revised
+       x = "Working Hours",
        y = "Frequency",
        caption = "Data Source: Korean Statistical Information Service (KOSIS)") +
   theme(
@@ -172,7 +174,9 @@ ggplot(workhour, mapping = aes(x = workhour, fill = Agegroup)) +
 # 4th ggplot2 Graph (Line Plot)
 
 ## Breif Dataset Explanation:
-The data used in Graph 4 is 2016 - 2023 dataset that reflects Seoul's Annual household Expenditures on Private Education according to KOSIS official website.
+
+The data used in Graph 4 come from a dataset spanning 2016 to 2023 that reflects Seoul's annual household expenditures on private education, sourced from the official KOSIS website.
+
 ```{r}
 #Due to missing data in year 2025, we use data from 2016 to 2023 in this part
 #The line pot reflects the private education expenditures in Seoul from 2016 to 2023
@@ -197,3 +201,6 @@ ggplot(seoul_edu, aes(x = Year, y = Expenditures)) +
 
 ## Dataset Graph Output Explanation:
 The chart shows a generally upward trend in private education expenditures in Seoul from 2016 to 2023. Despite some fluctuations in year 2020 which may be influenced by the outbreak of COVID-19, the overall increase suggests growing demand or greater investment in private education over this period. By 2023, expenditures are noticeably higher than in 2016, indicating that private education remains a significant and possibly expanding sector. However, additional context—such as population changes, policy shifts, or economic factors—would be needed to fully explain the observed trend.
+
+## Summary
+
