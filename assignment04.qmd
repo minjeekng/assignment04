@@ -72,7 +72,8 @@ Graph 1 uses data from a 2015-2023 dataset provided by the Korean Statistical In
 # We used abbreviation of provinces' names, instead of full name. The reason is 
 #that the province's names are long.
 
-ggplot(birthrate, mapping = aes(x = Province, y = birthrate, fill = year, color = )) +
+ggplot(birthrate, mapping = aes(x = Province, y = birthrate, fill = year, alpha = birthrate)) +
+  facet_wrap(~ year) +
   geom_col(width = 0.5) +
   labs(title = "Annual Birth Rate by Province in South Korea (2015 - 2023)",
        subtitle = "Urbanized areas show lower fertility rates;however, Sejong (SJG),a newly established city, exhibits an exceptionally high rate.",
@@ -160,6 +161,7 @@ The data used in Graph 3 come from datasets spanning 2015 to 2023 that capture m
 # **Need to design it later (font size color etc)
 
 ggplot(workhour, mapping = aes(x = workhour, fill = Agegroup)) +
+  facet_grid(year ~ Agegroup) +
   geom_histogram(binwidth = 0.5) +
   labs(title = "Monthly Working Hours by Age Groups (2015 - 2023)",
        subtitle = "An analysis of monthly working hours by age groups from 2015 to 2023 reveals distinct trends in work patterns, highlighting evolving labor demands and generational differences.",  #subtitle needs to be revised
