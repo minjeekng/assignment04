@@ -57,4 +57,4 @@ rsconnect/
 # to our gitignore file and save the file
 
 data/
-*.csv
+*.xlsx
