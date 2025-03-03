@@ -117,14 +117,12 @@ housingprice <- housingprice |>
 
 scatterplotdata <- full_join(birthrate, housingprice)
 
-scatterplotdata <- scatterplotdata |>
-  filter(Province %in% c("SEO"))
-
 # Making a Scatterplot
 
-ggplot(scatterplotdata, aes(x = housingprice, y = birthrate)) +
+ggplot(scatterplotdata, aes(x = housingprice, y = birthrate, linetype = Province)) +
   geom_point(alpha = 0.5, color = "red") +
   geom_smooth(method = "lm", color = "orange") +
+ facet_wrap(~Province)+ 
   labs(
     title = "Housing Prices vs. Birth Rates in Seoul (2015 - 2023)",
     subtitle = "A closer look at Seoul—despite having the lowest fertility rate—\nreveals that higher housing prices correspond with lower birth rates.", 
@@ -213,6 +211,9 @@ through 2023, expenditures increased sharply.",
     y = "Private Education Expenditure (billion Won)",
     caption = "Data Source: Korean Statistical Information Service (KOSIS)"
   ) +
+  annotate('text', x = 2016, y = 59500,
+         label = "A Generally Upward Trend",
+         hjust = 0, size = 3, color = 'blue') +
    theme_minimal()
 ```
 
@@ -222,19 +223,19 @@ Even in South Korea, where low birth rates are a serious concern, regional dispa
 
 ## 2nd Graph Output Explanation:
 
-From the scatter plot, we observe a strong negative correlation between housing prices and birth rate in Seoul. The fitted regression line slopes downward, indicating that higher housing prices are associated with lower birth rates. One possible interpretation is that as housing costs increase, financial constraints or concerns about affordability may lead some families to delay or reduce childbearing. However, it is important to note that correlation does not imply causation. Other factors could also influence birth rates.
+In Graph 1, we observed that Seoul has the lowest birth rate among all provinces. This leads to further exploration about the relationship between birth rate and housing prices. In Graph 2, we created scatterplot lines for different provinces, examining the correlation between housing prices and birth rates. Notably, the scatter plot for Seoul reveals a strong negative correlation. This suggests that higher housing prices are associated with lower birth rates in Seoul. One possible interpretation is that as housing costs increase, financial constraints or concerns about affordability may lead some families to delay or reduce childbearing. However, it is important to note that correlation does not imply causation. Other factors could also influence birth rates.
 
 ## 3rd Graph Output Explanation:
 
-The histogram displays the distribution of monthly working hours for different age groups from 2015-2023. KOSIS data reveals that the overall average working hours for 2023 is 157.6 hours. The histogram reveals that individuals aged 30 to 49 work significantly longer than the average level. This extended work duration indicates that middle-aged individuals are dedicating more time to their careers compared to other age groups. Such prolonged working hours may contribute to delayed family planning, which in turn could be a factor in Seoul's low fertility rate.
+The histogram displays the distribution of monthly working hours for different age groups from 2015-2023. KOSIS data reveals that the overall average working hours for 2023 is 157.6 hours. The histogram reveals that individuals aged '30 to 49' work significantly longer than the average level. This extended work duration indicates that middle-aged individuals are dedicating more time to their careers compared to other age groups. Such prolonged working hours may contribute to delayed family planning, which in turn could be a factor in Seoul's low fertility rate.
 
 ## 4th Graph Output Explanation:
 
-Because of the missing data in 2015, we use Seoul's Annual Household Expenditures on Private Education from 2016 to 2023. The fourth Graph shows a generally upward trend in these expenditures over this period. Despite some fluctuations in 2020—likely influenced by the COVID-19 outbreak. By 2023, expenditures are noticeably higher than in 2016, which suggest that households are investing more in private education over time. Importantly, this rising trend may help explain Seoul's low fertility rate, as higher private education costs can place additional financial burdens on families, potentially discouraging them from having more children. Thus, private education expenditures can be an important factor influencing Seoul's birth rate.  
+Because of the missing data in 2015, this analysis focused on Seoul's Annual Household Expenditures on Private Education from 2016 to 2023. The fourth Graph shows a generally upward trend in these expenditures over this period. Despite some fluctuations in 2020—likely influenced by the COVID-19 outbreak. By 2023, expenditures are noticeably higher than in 2016, which suggest that households are investing more in private education over time. Importantly, this rising trend may help explain Seoul's low fertility rate, as higher private education costs can place additional financial burdens on families, potentially discouraging them from having more children. Thus, private education expenditures can be an important factor influencing Seoul's birth rate.  
 
-## Conclusion
+## A Summary of the Visualizations
 
-In summary, our analysis demonstrates that Seoul's low fertility rate is shaped by a complex interplay of socio-economic factors related to housing, employment, and education. The visualizations reveal that while regions like Sejong benefit from integrated infrastructure and stable employment, Seoul's high housing prices are closely linked to reduced fertility rates. The negative correlation between housing prices and birth rates, combined with the extended working hours observed in the 30-49 age group and the steadily rising private education expenditures, underscores the multifaceted pressures faced by Seoul's families. These findings suggest that single-factor interventions, such as baby bonuses, are unlikely to be sufficient; instead, comprehensive cross-sector reforms are needed. Potential policy measures include stabilizing housing markets through increased supply and price controls, implementing progressive labor policies (e.g., mandatory parental leave and flexible working hours), and enhancing public education to reduce the reliance on expensive private tutoring, with additional crisis-responsive social safety nets to mitigate economic shocks.
+In summary, this analysis demonstrates that Seoul's low fertility rate is shaped by a complex interplay of socio-economic factors related to housing, employment, and education. The visualizations reveal that while regions like Sejong benefit from integrated infrastructure and stable employment, Seoul's high housing prices are closely linked to reduced fertility rates. The negative correlation between housing prices and birth rates, combined with the extended working hours observed in the '30-49' age group and the steadily rising private education expenditures, underscores the multifaceted pressures faced by Seoul's families. These findings suggest that single-factor interventions, such as baby bonuses, are unlikely to be sufficient; instead, comprehensive cross-sector reforms are needed. Potential policy measures include stabilizing housing markets through increased supply and price controls, implementing progressive labor policies (e.g., mandatory parental leave and flexible working hours), and enhancing public education to reduce the reliance on expensive private tutoring, with additional crisis-responsive social safety nets to mitigate economic shocks.
 
 # References
 
